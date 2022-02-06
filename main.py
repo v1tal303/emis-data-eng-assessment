@@ -1,16 +1,7 @@
-import pandas as pd
-import glob
-import json
+import os
 
-path = r'C:\Users\murci\Documents\GitHub\emis-data-eng-assessment\data'
-all_files = glob.glob(path + "/*.json")
+# Get all the .json files from the directory below
 
-print(all_files[0])
-
-data = pd.read_json(all_files[0])
-
-print(data)
-
-# for i in all_files:
-#     data = json.load(open(path, "r"))
-#     print(data[0][0])
+Allfiles = os.listdir('/Users/murci/Documents/GitHub/emis-data-eng-assessment/data')
+print(len(Allfiles))
+print(Allfiles)
