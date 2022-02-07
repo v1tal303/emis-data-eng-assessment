@@ -16,3 +16,13 @@ jobs:
         docker build -t python-fhir .
     - name: postgres
       run: docker-compose -f "docker-compose.yml"
+    - name: docker push
+      run: |
+        docker push v1tal303/emis-data-eng-assessment:tagname
+    - name: Push to Docker Hub
+      uses: docker/build-push-action@v1
+      with:
+        username: ${{ secrets.DOCKER_USERNAME }}
+        password: ${{ secrets.DOCKER_PASSWORD }}
+        repository: v1tal303/emis-data-eng-assessment
+        tags: latest, ${{ github.run_number }}
