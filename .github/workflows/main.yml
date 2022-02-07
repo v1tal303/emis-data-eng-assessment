@@ -25,4 +25,4 @@ jobs:
         run: |
           docker build -t python-fhir .
       - name: postgres
-        run: docker-compose up
+        run: docker-compose -f "docker-compose.yml"
