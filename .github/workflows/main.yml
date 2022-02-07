@@ -26,3 +26,4 @@ jobs:
         password: ${{ secrets.DOCKER_PASSWORD }}
         repository: v1tal303/emis-data-eng-assessment
         tags: latest, ${{ github.run_number }}
+        
