@@ -7,8 +7,10 @@
 import os
 import pandas as pd
 import json
+import sqlalchemy
 from tqdm.auto import tqdm
 from sqlalchemy import create_engine
+import psycopg2
 
 from fhir.resources.bundle import Bundle
 from fhir.resources.patient import Patient
@@ -25,8 +27,8 @@ tqdm.pandas()
 # Get all the .json files from the directory below
 
 Allfiles = os.listdir('./data')
-print(len(Allfiles))
-print(Allfiles)
+print(f"Discovered: {len(Allfiles)} files")
+
 
 # Initialize pandas dataframes
 
@@ -271,7 +273,7 @@ ENCOUNTER.to_csv('ENCOUNTER.csv', index=False)
 CLAIM.to_csv('CLAIM.csv', index=False)
 IMMUNIZATION.to_csv('IMMUNIZATION.csv', index=False)
 
-# Add name to all the dataframes
+# Add name to all the dataframes for reference
 
 PATIENT.name = "patient"
 CONDITION.name = "condition"
@@ -286,20 +288,34 @@ table_list = [PATIENT, CONDITION, OBSERVATION, MEDICATION, PROCEDURE, ENCOUNTER,
 
 # Establish a postgresql connection
 
-engine = create_engine('postgresql://postgres:password@localhost:5432/fhir')
+engine = create_engine('postgresql://postgres:password@db:5432/fhir')
+con = engine.connect()
+
+
+# Clear database if exists (if the tables have been created previously an primary key error will be raised)
+
+for i in table_list:
+    con.execute(f'DROP TABLE IF EXISTS {i.name} CASCADE;')
 
 # Add the dataframe to db
 
 for i in table_list:
     i.to_sql(name=str(i.name), con=engine, if_exists="replace", index=False)
 
-# Add primary key to patient
+# Add primary and foreign keys
 
-with engine.connect() as con:
-    con.execute('ALTER TABLE patient ADD PRIMARY KEY ("PatientUID");')
-
-# Add foreign keys to the rest
-
+con.execute('ALTER TABLE patient ADD PRIMARY KEY ("PatientUID");')
 for i in table_list[1:]:
-    with engine.connect() as con:
-        con.execute(f'ALTER TABLE {i.name} ADD CONSTRAINT fk_PUID FOREIGN KEY ("PatientUID") REFERENCES patient ("PatientUID");')
+    con.execute(f'ALTER TABLE {i.name} ADD CONSTRAINT fk_PUID FOREIGN KEY ("PatientUID") REFERENCES patient ("PatientUID");')
+
+print("DB fhir created successfully")
+
+# Check the created tables
+
+for i in table_list:
+    print(f"5 ROWS FROM TABLE: {i.name}")
+    print("____________________________")
+    sqlresult = con.execute(f'SELECT * FROM {i.name} LIMIT 5;')
+    print(sqlresult.fetchall())
+    print("____________________________")
+print("All tables have also been saved as .csv files")
