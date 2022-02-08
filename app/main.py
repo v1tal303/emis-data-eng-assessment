@@ -1,9 +1,3 @@
-# TODO:
-#  1) Figure out postgresql docker
-#  2) Clean up UX (progress bar, how many files, finished or error, etc.
-#  4) Clean warnings
-#  3) Add documentation to github (potentially with screenshots, diagrams)
-
 import os
 import pandas as pd
 import json
@@ -28,7 +22,6 @@ tqdm.pandas()
 
 Allfiles = os.listdir('./data')
 print(f"Discovered: {len(Allfiles)} files")
-
 
 # Initialize pandas dataframes
 
@@ -306,7 +299,8 @@ for i in table_list:
 
 con.execute('ALTER TABLE patient ADD PRIMARY KEY ("PatientUID");')
 for i in table_list[1:]:
-    con.execute(f'ALTER TABLE {i.name} ADD CONSTRAINT fk_PUID FOREIGN KEY ("PatientUID") REFERENCES patient ("PatientUID");')
+    con.execute(f'ALTER TABLE {i.name} ADD CONSTRAINT fk_PUID FOREIGN KEY ("PatientUID") REFERENCES patient ('
+                f'"PatientUID");')
 
 print("DB fhir created successfully")
 

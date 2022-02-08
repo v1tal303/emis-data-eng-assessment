@@ -3,3 +3,5 @@ test2.py
 *.csv
 .idea
 pgdata
+.ipynb_checkpoints
+emis-notebook-checkpoint.ipynb
