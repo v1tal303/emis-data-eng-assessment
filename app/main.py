@@ -284,7 +284,6 @@ table_list = [PATIENT, CONDITION, OBSERVATION, MEDICATION, PROCEDURE, ENCOUNTER,
 engine = create_engine('postgresql://postgres:password@db:5432/fhir')
 con = engine.connect()
 
-
 # Clear database if exists (if the tables have been created previously an primary key error will be raised)
 
 for i in table_list:
