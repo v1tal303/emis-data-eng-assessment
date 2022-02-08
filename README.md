@@ -4,7 +4,7 @@ This is a technical assessment solution to the task provided by EmisGroup for a 
 
 ## Brief task description
 
-Design and prototype a data-pipeline from FHIR standard.
+Design and prototype a data-pipeline from FHIR standard (json data into tabular csv or sql format)
 
 ## Solution formulation
 
@@ -15,16 +15,16 @@ The summary of steps I followed:
 3. Brainstormed on how to convert this complex json data into tabular form with pandas.
 4. Took a step back and researched into the FHIR standard and understand ETL pipelines.
 5. Discovered the [FL7FHIR Resources](https://github.com/nazrulworld/fhir.resources) and made sense of the example codes which helped me to breakdown the problem further.
-6. Produced an MVP following discovered examples that allowed me to slice the data into csv form (PATIENT, CONDITION, OBSERVATION, MEDICATION, PROCEDURE, ENCOUNTER, CLAIM and IMMUNIZATION)
-7. Added a feature to export the dataframe to_sql split into separate tables with primary and foreign keys
-8. Query SQL tables to check if the scripts was successful
-9. Provide a docker-compose solution
+6. Produced an MVP following discovered examples that allowed me to slice the data into csv form (PATIENT, CONDITION, OBSERVATION, MEDICATION, PROCEDURE, ENCOUNTER, CLAIM and IMMUNIZATION).
+7. Added a feature to export the dataframe to_sql split into separate tables with primary and foreign keys.
+8. Query SQL tables to check if the scripts was successful.
+9. Provide a docker-compose solution.
 
 ## Libraries/Tools used
 
 -pandas
 -json
--tqdm (Unfortunately doesn't work in docker-compose environment)
+-tqdm (Unfortunately will not display properly in docker-compose environment)
 -sqlalchemy
 -fhir
 -docker
