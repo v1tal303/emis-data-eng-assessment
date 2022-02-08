@@ -1,6 +1,6 @@
 # Data Engineer - Technical Assessment
 
-This is a technical assessment solution to the task provided by EmisGroup for a Developer position.
+This is a technical assessment solution to the task provided by Emis Group for a Developer position.
 
 ## Brief task description
 
@@ -49,4 +49,5 @@ Two docker instances will be ran. First a postgresql instance will be created on
 
 ## Personal reflection
 
-Generally, the assignment was fun, although quite challenging. Although I leveraged my skills in python and postgresql to solve this solution, there were many new techniques, tools and workflows had to be picked up along the way. Therefore, a breakdown of the problem and a lot of structured googling/research was crucial especially due to the time constraint. In order to improve the code, a further discussion would be beneficial to understand the deeper requirements for the data and required features, which could allow on cutting down the code (choice between .csv or sql, graphical features, etc.). 
+Generally, the assignment was fun, although quite challenging due to the time constraint. I leveraged my skills in python and postgresql to solve this task, however, there were many new techniques, tools and workflows that had to be learnt. All of this was achieved through a lot of structured googling, research and trial and error along the way. 
+There are places to improve. A further discussion would be beneficial to understand the requirements for the data in more detail. This could potentially allow me to cut down the lines of code (choice between .csv or sql, requirement for any graphical features, etc.). And finally a further and research in how this code performs in larger datasets could be beneficial. 
